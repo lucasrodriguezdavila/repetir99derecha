@@ -8,22 +8,34 @@
 .main-navbar-button {
   background: rgba(239, 58, 31, 0.8);
   border: none;
-  padding: 0.5rem 4rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   min-width: 6rem;
-  border-radius: 1rem 1rem 0px 0px;
+  border-radius: 20px 20px 0px 0px;
   position: relative;
-  font-weight: bold;
-  font-size: 1.5rem;
   transition: all 0.2s ease-in-out;
-  color: white;
   margin-left: 0.5rem;
+}
+
+.main-navbar-title {
+  font-weight: regular;
+  font-size: 2.2rem;
+  margin: 0px;
+  color: white;
+}
+
+.main-navbar-subtitle {
+  font-weight: 200;
+  font-size: 1rem;
+  margin: 0px;
+  margin-bottom: 1.5rem;
+  color: white;
 }
 
 .main-navbar-dropdown {
   display: none;
   position: absolute;
   right: -4px;
-  bottom: 2.5rem;
+  bottom: 6.5rem;
   width: 100%;
 }
 
@@ -37,8 +49,7 @@
 
 .main-navbar-dropdown li a {
   color: white;
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+  font-size: 2rem;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 200;
@@ -46,6 +57,13 @@
 
 .main-navbar-dropdown li a:hover {
   color: rgba(40, 100, 255, 1);
+}
+
+.main-navbar-dropdown-divider {
+  width: 50%;
+  height: 1.5px;
+  background: white;
+  margin: 0.5rem 0px 0.5rem 0px;
 }
 
 .main-navbar-menu-item {
@@ -60,16 +78,6 @@
 
 .main-navbar-button:hover {
   background: rgba(239, 58, 31, 1);
-}
-
-.main-navbar-button::after {
-  background: white;
-  content: "";
-  width: 20%;
-  height: 0.2rem;
-  position: absolute;
-  top: 0.3rem;
-  left: 40%;
 }
 
 .main-navbar-ul {
