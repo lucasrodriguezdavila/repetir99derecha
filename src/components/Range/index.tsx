@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import moment from "moment";
-import { DATE_FORMAT } from "../constants";
+import { DATE_FORMAT } from "../../constants";
 import "./index.css";
 
 interface Props {
