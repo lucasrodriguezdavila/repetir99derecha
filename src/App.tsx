@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { SatRec, twoline2satrec } from "satellite.js";
 import Globo from "./components/Globo/Globo";
-import { getSatelliteByID } from "./services/SatelliteService";
+import { MainNavbar } from "./components/MainNavbar";
 
 function App() {
   const satelliteId = 25544;
 
   return (
     <div className="App">
+      <MainNavbar />
       <Globo satelliteId={satelliteId} />
     </div>
   );
