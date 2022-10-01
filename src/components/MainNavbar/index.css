@@ -1,0 +1,44 @@
+.main-navbar {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.main-navbar-button {
+  background: rgba(239, 58, 31, 0.8);
+  border: none;
+  padding: 0.5rem 4rem;
+  min-width: 6rem;
+  border-radius: 1rem 1rem 0px 0px;
+  position: relative;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: all 0.2s ease-in-out;
+  color: white;
+  margin-left: 0.5rem;
+}
+
+.main-navbar-button:hover {
+  background: rgba(239, 58, 31, 1);
+}
+
+.main-navbar-button::after {
+  background: white;
+  content: "";
+  width: 20%;
+  height: 0.2rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 40%;
+}
+
+.main-navbar-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding: 0px 1rem;
+}
