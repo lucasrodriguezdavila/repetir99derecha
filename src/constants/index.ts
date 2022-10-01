@@ -11,3 +11,5 @@ export const INITIAL_POSITION = {
     z: 0,
   },
 };
+export const SAT_SIZE = 100; // km
+export const TIME_STEP = 3 * 1000; // per frame

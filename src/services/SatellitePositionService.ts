@@ -1,19 +1,38 @@
 import {
   PositionAndVelocity,
   propagate,
-  twoline2satrec,
   EciVec3,
   eciToGeodetic,
   gstime,
-  degreesLong,
-  degreesLat,
+  SatRec,
 } from "satellite.js";
 import { EARTH_RADIUS_KM } from "../constants";
-import {
-  SatelliteCoordinates,
-  SatellitePosition,
-} from "../interfaces/Satellite";
-import { SatelliteTLEResponse } from "./types/satelliteTleResponse";
+import { SatelliteCoordinates } from "../interfaces/Satellite";
+
+const radiansToDegrees = (radians: number): number => {
+  var pi = Math.PI;
+  return radians * (180 / pi);
+};
+
+const buildSatellitePostion = (
+  satrec: SatRec,
+  time: Date
+): SatelliteCoordinates => {
+  const prop = propagate(satrec, time);
+  const gtime = gstime(time);
+  const coords = eciToGeodetic(prop.position as EciVec3<number>, gtime);
+  const { longitude, latitude } = coords;
+  return {
+    longitude: radiansToDegrees(longitude),
+    latitude: radiansToDegrees(latitude),
+    altitude: coords.height / EARTH_RADIUS_KM,
+  };
+};
+
+const getCoordinates = (satrec: SatRec, time: Date) => {
+  const prediction = propagate(satrec, time);
+  return getPredictionData(prediction);
+};
 
 const getPredictionData = (prediction: PositionAndVelocity) => {
   const { position, velocity } = prediction;
@@ -22,26 +41,6 @@ const getPredictionData = (prediction: PositionAndVelocity) => {
   return {
     position: { x, y, z },
     velocity: { x: vx, y: vy, z: vz },
-  };
-};
-
-const getCoordinates = (satelliteData: SatelliteTLEResponse) => {
-  const { line1, line2 } = satelliteData;
-  const twoLines = twoline2satrec(line1, line2);
-  const prediction = propagate(twoLines, new Date());
-  return getPredictionData(prediction);
-};
-
-const buildSatellitePostion = (
-  data: SatellitePosition
-): SatelliteCoordinates => {
-  const time = gstime(new Date());
-  const coords = eciToGeodetic(data.position, time);
-  const { longitude, latitude } = coords;
-  return {
-    longitude: degreesLong(longitude),
-    latitude: degreesLat(latitude),
-    altitude: coords.height / EARTH_RADIUS_KM,
   };
 };
 
