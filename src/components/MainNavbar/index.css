@@ -40,10 +40,12 @@
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
   text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 200;
 }
 
 .main-navbar-dropdown li a:hover {
-  color: lightskyblue;
+  color: rgba(40, 100, 255, 1);
 }
 
 .main-navbar-menu-item {
