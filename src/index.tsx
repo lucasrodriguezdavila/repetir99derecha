@@ -9,11 +9,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <SatelliteProvider>
-      <App />
-    </SatelliteProvider>
-  </React.StrictMode>
+  <SatelliteProvider>
+    <App />
+  </SatelliteProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

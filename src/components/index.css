@@ -1,0 +1,18 @@
+.range-container {
+  color: white;
+}
+
+.range-input-container {
+  display: flex;
+  height: 3rem;
+  width: 100%;
+}
+
+.range-input-container input {
+  margin: 0px 1rem;
+  flex: 1;
+}
+
+.range-input-container p {
+  font-weight: 8px;
+}
