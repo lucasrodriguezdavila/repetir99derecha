@@ -1,19 +1,26 @@
+import React from "react";
+import { FaSatellite } from "react-icons/fa";
+import "./index.css";
+
 interface Props {
   visible?: boolean;
 }
 export const NASASpotStation: React.FC<Props> = ({ visible = true }) => {
+  const [show, setShow] = React.useState(false);
+
   if (!visible) {
     return null;
   }
+
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "1rem",
-        right: "1rem",
-        zIndex: 1000,
-      }}
-    >
+    <div className="nasa-spot-container">
+      <div
+        className="nasa-spot-icon-container"
+        about="nasa-spot-icon-container"
+      >
+        <FaSatellite />
+        Cuando sera visible la estacion espacial internacional?
+      </div>
       <div
         style={{
           display: "inline-block",

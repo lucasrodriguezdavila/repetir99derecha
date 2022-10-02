@@ -1,0 +1,13 @@
+.nasa-spot-container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+.nasa-spot-icon-container {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
