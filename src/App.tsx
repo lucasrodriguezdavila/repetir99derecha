@@ -3,6 +3,7 @@ import { MainNavbar } from "./components/MainNavbar";
 
 function App() {
   const satelliteId = 25544;
+
   return (
     <div className="App">
       <MainNavbar />
