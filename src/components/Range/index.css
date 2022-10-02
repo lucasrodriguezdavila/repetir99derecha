@@ -1,10 +1,15 @@
-.range-container {
-  color: white;
+.range-wrapper {
+  display: flex;
   position: absolute;
   bottom: 1rem;
   width: 30%;
   left: 0;
   z-index: 100;
+  align-items: flex-end;
+}
+.range-container {
+  color: white;
+  flex: 1;
 }
 
 .range-input-container {
@@ -27,4 +32,8 @@
 
 .range-input-container p {
   font-weight: 8px;
+}
+
+.hidden {
+  display: none;
 }

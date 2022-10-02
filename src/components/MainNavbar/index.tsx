@@ -2,8 +2,10 @@ import { useCallback } from "react";
 import { useSatellite } from "../../context/SatelliteContext";
 import "./index.css";
 
-interface Props {}
-export const MainNavbar: React.FC<Props> = () => {
+interface Props {
+  isHidden?: boolean;
+}
+export const MainNavbar: React.FC<Props> = ({ isHidden }) => {
   const { setIsISSTracked, isISSTracked } = useSatellite();
 
   const handleTrackISS = useCallback(() => {
@@ -19,17 +21,6 @@ export const MainNavbar: React.FC<Props> = () => {
             </p>
             <p className="main-navbar-subtitle">Tracking Data Panel</p>
           </button>
-          <ul className="main-navbar-dropdown">
-            <li>
-              <a href="/">Risk</a>
-              <div className="main-navbar-dropdown-divider" />
-              <a href="/">Risk</a>
-              <div className="main-navbar-dropdown-divider" />
-              <a href="/">Risk</a>
-              <div className="main-navbar-dropdown-divider" />
-              <a href="/">Risk</a>
-            </li>
-          </ul>
         </li>
       </ul>
     </div>
