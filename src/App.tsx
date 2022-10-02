@@ -23,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <MainNavbar />
-      {satRec && <IssPathGlobe satelliteId={satelliteId} satRec={satRec} />}
+      {satRec && <Globo satelliteId={satelliteId} satRec={satRec} />}
     </div>
   );
 }
