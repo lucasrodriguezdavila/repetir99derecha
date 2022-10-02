@@ -5,7 +5,7 @@ import { SatelliteTLEResponse } from "./types/satelliteTleResponse";
 const axiosInstance = axios.create({
   timeout: 5000,
   headers: {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://whereiss.repetir99derecha.com/",
   },
 });
 
