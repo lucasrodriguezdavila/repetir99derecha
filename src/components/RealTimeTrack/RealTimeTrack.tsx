@@ -32,6 +32,8 @@ import YoutubeEmbed from "../YoutubeEmbed/YoutubeEmbed";
 
 import "./index.css";
 import { Location } from "../Location";
+import { NasaLogo } from "../NasaLogo";
+import { SpaceAppsLogo } from "../SpaceAppsLogo";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
 
@@ -285,6 +287,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         onLocationPrompt={promptLocation}
         onLocationFocus={handleLocationFocus}
       />
+      <NasaLogo />
+      <SpaceAppsLogo />
     </>
   );
 };

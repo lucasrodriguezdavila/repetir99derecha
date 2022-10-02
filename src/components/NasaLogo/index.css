@@ -1,0 +1,7 @@
+.nasa-logo-container {
+  position: absolute;
+  top: 0;
+  left: -4rem;
+  width: 20rem;
+  z-index: 100;
+}
