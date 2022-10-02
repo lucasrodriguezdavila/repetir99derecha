@@ -3,10 +3,11 @@ import "./panel.css";
 
 interface Props {
   children?: ReactElement;
+  position: "left" | "right";
 }
 
-const Panel = ({ children }: Props) => {
-  return <section className="panel">{children}</section>;
+const Panel = ({ children, position }: Props) => {
+  return <section className={`panel ${position}`}>{children}</section>;
 };
 
 export default Panel;

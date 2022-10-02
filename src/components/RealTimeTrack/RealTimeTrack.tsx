@@ -2,11 +2,12 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Globe, { GlobeMethods } from "react-globe.gl";
 import { SatRec, twoline2satrec } from "satellite.js";
 import { OctahedronGeometry, MeshLambertMaterial, Mesh } from "three";
+import { ReactComponent as Logo } from "../../assets/NASA_logo.svg";
 import {
   EARTH_RADIUS_KM,
   INITIAL_POSITION,
   SAT_SIZE,
-  TIME_STEP,
+  ALTITUDE_OFFSET,
 } from "../../constants";
 import { GloboProps } from "../../interfaces/Globo";
 import {
@@ -26,6 +27,8 @@ import moment from "moment";
 import { useSatellite } from "../../context/SatelliteContext";
 import * as THREE from "three";
 import Panel from "../Live/Panel/Panel";
+import { NASASpotStation } from "../NASASpotStation";
+import YoutubeEmbed from "../YoutubeEmbed/YoutubeEmbed";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
 
@@ -36,7 +39,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const [issModel, setIssModel] = useState<THREE.Object3D | undefined>(
     undefined
   );
-  const { isISSTracked, setRelativeTime, relativeTime } = useSatellite();
+  const { isISSTracked, relativeTime } = useSatellite();
   const [currentLocation, setCurrentLocation] = useState<
     | {
         lat: number;
@@ -132,6 +135,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         lat: satPosition.latitude as number,
         //@ts-ignore
         lng: satPosition.longitude as number,
+        //@ts-ignore
+        altitude: (satPosition.altitude as number) + ALTITUDE_OFFSET,
       });
       // @ts-ignore
       globeEl.current.controls().enableRotate = false;
@@ -206,7 +211,17 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         ringPropagationSpeed={1}
         ringRepeatPeriod={1000}
       />
-      {isISSTracked && <Panel></Panel>}
+      {isISSTracked && (
+        <Panel position="left">
+          <Logo />
+        </Panel>
+      )}
+      {isISSTracked && (
+        <Panel position="right">
+          <YoutubeEmbed embedId="21X5lGlDOfg" />
+        </Panel>
+      )}
+      <NASASpotStation visible={!isISSTracked} />
     </>
   );
 };

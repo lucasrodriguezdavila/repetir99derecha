@@ -1,8 +1,4 @@
 .live-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
   background: rgba(239, 58, 31, 0.8);
   display: flex;
   padding: 0.25rem 0.5rem 0.5rem 0.5rem;
@@ -10,10 +6,12 @@
   font-size: 1.25rem;
   font-weight: 600;
   align-items: center;
-  border-radius: 0px 0px 10px 0px;
+  border-radius: 10px;
   justify-content: space-between;
   width: 4.5rem;
   transition: all 0.2s ease-in-out;
+  height: 1.5rem;
+  left: 100%;
 }
 
 .live-container.live-not-live {
@@ -27,4 +25,5 @@
   border-radius: 50%;
   background: white;
   margin: auto;
+  margin-top: 0.45rem;
 }
