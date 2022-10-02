@@ -125,7 +125,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       moment(time).add(4, "hours").toDate()
     );
     return data;
-  }, [satData, time]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [satData]);
 
   return (
     <Globe
