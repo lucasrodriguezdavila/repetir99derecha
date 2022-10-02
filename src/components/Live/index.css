@@ -12,6 +12,7 @@
   transition: all 0.2s ease-in-out;
   height: 1.5rem;
   left: 100%;
+  cursor: not-allowed;
 }
 
 .live-container.live-not-live {

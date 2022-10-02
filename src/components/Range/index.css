@@ -27,6 +27,7 @@
 
 .range-input-container input {
   margin: 0px 1rem;
+  cursor: pointer;
   flex: 1;
 }
 
