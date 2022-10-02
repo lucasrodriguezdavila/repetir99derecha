@@ -26,6 +26,8 @@ import moment from "moment";
 import { useSatellite } from "../../context/SatelliteContext";
 import * as THREE from "three";
 
+const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
+
 const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const globeEl = useRef<GlobeMethods>();
   const [globeRadius, setGlobeRadius] = useState(0);
@@ -34,6 +36,13 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     undefined
   );
   const { isISSTracked, setRelativeTime, relativeTime } = useSatellite();
+  const [currentLocation, setCurrentLocation] = useState<
+    | {
+        lat: number;
+        lng: number;
+      }
+    | undefined
+  >();
 
   const handleLoadISSModel = async (gltfPath: string) => {
     const loader = new GLTFLoader();
@@ -56,10 +65,20 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     globeEl.current.pointOfView({ altitude: 4 }, 10);
   }, []);
 
+  const promptLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentLocation({ lat: latitude, lng: longitude });
+      });
+    }
+  };
+
   useEffect(() => {
     // time ticker
     const globe = globeEl.current;
     handleLoadISSModel("/assets/ISS1.gltf");
+    promptLocation();
     new THREE.TextureLoader().load(
       getCorsFreeUrl(
         "https://github.com/turban/webgl-earth/blob/master/images/fair_clouds_4k.png?raw=true"
@@ -179,6 +198,12 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       // @ts-ignore
       pathPointAlt={satPosition.altitude}
       pathDashAnimateTime={100000}
+      ringsData={currentLocation ? [currentLocation] : []}
+      ringColor={() => colorInterpolator}
+      ringAltitude={0.01}
+      ringMaxRadius={2}
+      ringPropagationSpeed={1}
+      ringRepeatPeriod={1000}
     />
   );
 };
