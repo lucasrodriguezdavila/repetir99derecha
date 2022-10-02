@@ -9,13 +9,18 @@ import {
   TIME_STEP,
 } from "../../constants";
 import { GloboProps } from "../../interfaces/Globo";
-import { buildSatellitePostion } from "../../helpers/SatellitePositionHelper";
+import {
+  buildPathsBetweenDates,
+  buildSatellitePostion,
+} from "../../helpers/SatellitePositionHelper";
 import { getSatelliteByID } from "../../services/SatelliteService";
 import { SatelliteTLEResponse } from "../../services/types/satelliteTleResponse";
 
 //stuff about the ISS model
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import moment from "moment";
+import { useSatellite } from "../../context/SatelliteContext";
 
 const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const globeEl = useRef<GlobeMethods>();
@@ -25,6 +30,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const [issModel, setIssModel] = useState<THREE.Object3D | undefined>(
     undefined
   );
+  const { isISSTracked } = useSatellite();
 
   const handleLoadISSModel = async (gltfPath: string) => {
     const loader = new GLTFLoader();
@@ -72,6 +78,23 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     return { ...buildSatellitePostion(satData, time), name: "ISS" };
   }, [satData, time]);
 
+  useEffect(() => {
+    console.log(satPosition);
+    if (isISSTracked) {
+      // @ts-ignore
+      globeEl.current.pointOfView({
+        // @ts-ignore
+        lat: satPosition.latitude as number,
+        //@ts-ignore
+        lng: satPosition.longitude as number,
+      });
+      // @ts-ignore
+      globeEl.current.controls().enableRotate = false;
+      // @ts-ignore
+      globeEl.current.controls().update();
+    }
+  }, [time, satPosition, isISSTracked]);
+
   const satObject = useMemo(() => {
     if (!globeRadius) return undefined;
 
@@ -95,6 +118,15 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     globeEl!.current!.pointOfView({ altitude: 3.5 });
   }, []);
 
+  const gData = useMemo(() => {
+    const data = buildPathsBetweenDates(
+      satData!,
+      time,
+      moment(time).add(4, "hours").toDate()
+    );
+    return data;
+  }, [satData, time]);
+
   return (
     <Globe
       ref={globeEl}
@@ -105,6 +137,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       objectLng="longitude"
       objectAltitude="altitude"
       globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+      pathsData={gData}
+      pathDashAnimateTime={100000}
     />
   );
 };
