@@ -31,6 +31,7 @@ import { NASASpotStation } from "../NASASpotStation";
 import YoutubeEmbed from "../YoutubeEmbed/YoutubeEmbed";
 
 import "./index.css";
+import { Location } from "../Location";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
 
@@ -73,10 +74,15 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
 
   const promptLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setCurrentLocation({ lat: latitude, lng: longitude });
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation({ lat: latitude, lng: longitude });
+        },
+        (err) => {
+          console.error({ err });
+        }
+      );
     }
   };
 
@@ -261,6 +267,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         </Panel>
       )}
       <NASASpotStation visible={!isISSTracked} />
+      <Location onClick={promptLocation} />
     </>
   );
 };

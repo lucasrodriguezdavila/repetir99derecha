@@ -9,7 +9,7 @@ interface Props {
 export const Location: React.FC<Props> = ({ onClick }) => {
   return (
     <div className="location-container" onClick={onClick}>
-      <BiCurrentLocation></BiCurrentLocation>
+      <BiCurrentLocation size={52} color="#2864FF"></BiCurrentLocation>
     </div>
   );
 };
