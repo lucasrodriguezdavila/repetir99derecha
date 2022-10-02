@@ -6,6 +6,7 @@ import { SatRec, twoline2satrec } from "satellite.js";
 import { SatelliteTLEResponse } from "./services/types/satelliteTleResponse";
 import { getSatelliteByID } from "./services/SatelliteService";
 import Range from "./components/Range";
+import { Live } from "./components/Live";
 
 function App() {
   const satelliteId = 25544;
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
       <Range />
       <MainNavbar />
+      <Live />
       {satRec && <Globo satelliteId={satelliteId} satRec={satRec} />}
     </div>
   );

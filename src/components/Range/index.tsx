@@ -56,6 +56,7 @@ const Range: React.FC<Props> = ({ onChange }) => {
           <input
             min={minDate}
             max={maxDate}
+            value={relativeTime.getTime()}
             onChange={handleOnChange}
             type="range"
           ></input>

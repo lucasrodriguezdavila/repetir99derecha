@@ -1,0 +1,30 @@
+.live-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(239, 58, 31, 0.8);
+  display: flex;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  align-items: center;
+  border-radius: 0px 0px 10px 0px;
+  justify-content: space-between;
+  width: 4.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.live-container.live-not-live {
+  cursor: pointer;
+  background: gray;
+}
+
+.live-white-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: white;
+  margin: auto;
+}
