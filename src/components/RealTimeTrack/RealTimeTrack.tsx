@@ -9,11 +9,11 @@ import {
   TIME_STEP,
 } from "../../constants";
 import { GloboProps } from "../../interfaces/Globo";
-import { buildSatellitePostion } from "../../services/SatellitePositionService";
+import { buildSatellitePostion } from "../../helpers/SatellitePositionHelper";
 import { getSatelliteByID } from "../../services/SatelliteService";
 import { SatelliteTLEResponse } from "../../services/types/satelliteTleResponse";
 
-const Globo = ({ satelliteId }: GloboProps) => {
+const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const globeEl = useRef<GlobeMethods>();
   const [time, setTime] = useState(new Date());
   const [globeRadius, setGlobeRadius] = useState(0);
@@ -83,4 +83,4 @@ const Globo = ({ satelliteId }: GloboProps) => {
   );
 };
 
-export default Globo;
+export default RealTimeTrack;
