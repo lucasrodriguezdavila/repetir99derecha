@@ -1,0 +1,8 @@
+.space-apps-container {
+  position: absolute;
+  top: 1rem;
+  left: 11rem;
+  width: 8rem;
+  border-radius: 50%;
+  z-index: 100;
+}
