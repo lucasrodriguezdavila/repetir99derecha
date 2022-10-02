@@ -13,7 +13,10 @@ import {
   buildPathsBetweenDates,
   buildSatellitePostion,
 } from "../../helpers/SatellitePositionHelper";
-import { getSatelliteByID } from "../../services/SatelliteService";
+import {
+  getCorsFreeUrl,
+  getSatelliteByID,
+} from "../../services/SatelliteService";
 import { SatelliteTLEResponse } from "../../services/types/satelliteTleResponse";
 
 //stuff about the ISS model
@@ -21,6 +24,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import moment from "moment";
 import { useSatellite } from "../../context/SatelliteContext";
+import * as THREE from "three";
 
 const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const globeEl = useRef<GlobeMethods>();
@@ -54,7 +58,33 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
 
   useEffect(() => {
     // time ticker
+    const globe = globeEl.current;
     handleLoadISSModel("/assets/ISS1.gltf");
+    new THREE.TextureLoader().load(
+      getCorsFreeUrl(
+        "https://github.com/turban/webgl-earth/blob/master/images/fair_clouds_4k.png?raw=true"
+      ),
+      (cloudsTexture) => {
+        const CLOUDS_ALT = 0.004;
+        const CLOUDS_ROTATION_SPEED = -0.006; // deg/frame
+        const clouds = new THREE.Mesh(
+          new THREE.SphereGeometry(
+            // @ts-ignore
+            globe.getGlobeRadius() * (1 + CLOUDS_ALT),
+            75,
+            75
+          ),
+          new THREE.MeshPhongMaterial({ map: cloudsTexture, transparent: true })
+        );
+        // @ts-ignore
+        globe.scene().add(clouds);
+
+        (function rotateClouds() {
+          clouds.rotation.y += (CLOUDS_ROTATION_SPEED * Math.PI) / 180;
+          requestAnimationFrame(rotateClouds);
+        })();
+      }
+    );
     const interval = setInterval(() => {
       setRelativeTime(new Date());
     }, TIME_STEP);
@@ -141,8 +171,13 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       objectLat="latitude"
       objectLng="longitude"
       objectAltitude="altitude"
-      globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
+      globeImageUrl={getCorsFreeUrl(
+        "https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg?raw=true"
+      )}
       pathsData={gData}
+      atmosphereAltitude={0.3}
+      // @ts-ignore
+      pathPointAlt={satPosition.altitude}
       pathDashAnimateTime={100000}
     />
   );

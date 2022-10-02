@@ -5,7 +5,7 @@ const axiosInstance = axios.create({
   timeout: 5000,
 });
 
-function getCorsFreeUrl(url: string) {
+export function getCorsFreeUrl(url: string) {
   return "https://api.allorigins.win/raw?url=" + url;
 }
 
