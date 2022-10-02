@@ -29,6 +29,7 @@ import * as THREE from "three";
 import Panel from "../Live/Panel/Panel";
 import { NASASpotStation } from "../NASASpotStation";
 import YoutubeEmbed from "../YoutubeEmbed/YoutubeEmbed";
+
 import "./index.css";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
@@ -145,7 +146,6 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       // @ts-ignore
       globeEl.current.controls().update();
     } else {
-      globeEl!.current!.pointOfView({ altitude: 3.5 });
       // @ts-ignore
       globeEl.current.controls().enableRotate = true;
       // @ts-ignore
@@ -220,7 +220,6 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
             <Logo />
             <h3>International Space Station.</h3>
             <article>
-              {" "}
               The ISS is a proof of the potential of humanity represented by the
               union of 16 countries with the sole purpose of maintaining the
               first and only permanent microgravity research station to date. It

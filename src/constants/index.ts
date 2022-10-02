@@ -12,5 +12,4 @@ export const INITIAL_POSITION = {
   },
 };
 export const SAT_SIZE = 100; // km
-export const TIME_STEP = 1 * 1000; // per frame
 export const ALTITUDE_OFFSET = 0.09;

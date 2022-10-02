@@ -27,8 +27,6 @@ export const NASASpotStation: React.FC<Props> = ({ visible = true }) => {
           border: "1px solid #CCC",
           borderRadius: "6px",
           WebkitBorderRadius: "6px",
-          //@ts-ignore
-          "o-border-radius": "6px",
           position: "relative",
           overflow: "hidden",
           width: "310px",
