@@ -15,7 +15,7 @@ export const NASASpotStation: React.FC<Props> = ({ visible = true }) => {
     <div className="nasa-spot-container">
       {!show && (
         <div className="nasa-spot-icon-container" onClick={() => setShow(true)}>
-          Cuando sera visible la estacion espacial internacional?
+          When will the international space station be visible?
         </div>
       )}
       {show && (
@@ -23,7 +23,7 @@ export const NASASpotStation: React.FC<Props> = ({ visible = true }) => {
           className="nasa-spot-icon-container-hide"
           onClick={() => setShow(false)}
         >
-          Ocultar
+          Hide
         </div>
       )}
       {show && (

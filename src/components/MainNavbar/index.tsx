@@ -17,7 +17,7 @@ export const MainNavbar: React.FC<Props> = ({ isHidden }) => {
         <li className="main-navbar-menu-item">
           <button onClick={handleTrackISS} className="main-navbar-button">
             <p className="main-navbar-title">
-              {isISSTracked ? "Exit ISS" : "Enter ISS"}
+              {isISSTracked ? "Stop follow ISS" : "Follow ISS"}
             </p>
             <p className="main-navbar-subtitle">Tracking Data Panel</p>
           </button>
