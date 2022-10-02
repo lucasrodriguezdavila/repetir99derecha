@@ -8,8 +8,8 @@
 .main-navbar-button {
   background: rgba(239, 58, 31, 0.8);
   border: none;
-  padding: 1rem 1rem 0.5rem 1rem;
-  min-width: 6rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
+  min-width: 16rem;
   border-radius: 20px 20px 0px 0px;
   position: relative;
   transition: all 0.2s ease-in-out;
