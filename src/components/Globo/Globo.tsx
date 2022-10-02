@@ -27,17 +27,16 @@ const Globo = ({ satelliteId }: GloboProps) => {
 
   useEffect(() => {
     // time ticker
-    (function frameTicker() {
-      requestAnimationFrame(frameTicker);
-      setTime((time) => new Date(+time + TIME_STEP));
-    })();
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, TIME_STEP);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
     // get satellite data
     getSatelliteByID(satelliteId).then((sat) => {
       const data = sat as unknown as SatelliteTLEResponse;
-      debugger;
       if (data.line1) {
         const satRec = twoline2satrec(data.line1, data.line2);
         setSatData(satRec);
