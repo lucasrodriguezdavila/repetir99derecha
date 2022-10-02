@@ -79,7 +79,6 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   }, [satData, time]);
 
   useEffect(() => {
-    console.log(satPosition);
     if (isISSTracked) {
       // @ts-ignore
       globeEl.current.pointOfView({
@@ -90,6 +89,11 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       });
       // @ts-ignore
       globeEl.current.controls().enableRotate = false;
+      // @ts-ignore
+      globeEl.current.controls().update();
+    } else {
+      // @ts-ignore
+      globeEl.current.controls().enableRotate = true;
       // @ts-ignore
       globeEl.current.controls().update();
     }
