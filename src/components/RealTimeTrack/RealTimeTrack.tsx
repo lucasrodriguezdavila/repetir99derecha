@@ -193,6 +193,9 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       globeImageUrl={getCorsFreeUrl(
         "https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg?raw=true"
       )}
+      bumpImageUrl={getCorsFreeUrl(
+        "https://github.com/turban/webgl-earth/blob/master/images/elev_bump_4k.jpg?raw=true"
+      )}
       pathsData={gData}
       atmosphereAltitude={0.3}
       // @ts-ignore
