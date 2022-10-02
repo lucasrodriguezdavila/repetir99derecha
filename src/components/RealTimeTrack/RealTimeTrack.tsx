@@ -24,13 +24,12 @@ import { useSatellite } from "../../context/SatelliteContext";
 
 const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const globeEl = useRef<GlobeMethods>();
-  const [time, setTime] = useState(new Date());
   const [globeRadius, setGlobeRadius] = useState(0);
   const [satData, setSatData] = useState<SatRec>();
   const [issModel, setIssModel] = useState<THREE.Object3D | undefined>(
     undefined
   );
-  const { isISSTracked } = useSatellite();
+  const { isISSTracked, setRelativeTime, relativeTime } = useSatellite();
 
   const handleLoadISSModel = async (gltfPath: string) => {
     const loader = new GLTFLoader();
@@ -57,9 +56,10 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     // time ticker
     handleLoadISSModel("/assets/ISS1.gltf");
     const interval = setInterval(() => {
-      setTime(new Date());
+      setRelativeTime(new Date());
     }, TIME_STEP);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -75,8 +75,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
 
   const satPosition = useMemo(() => {
     if (!satData) return INITIAL_POSITION;
-    return { ...buildSatellitePostion(satData, time), name: "ISS" };
-  }, [satData, time]);
+    return { ...buildSatellitePostion(satData, relativeTime), name: "ISS" };
+  }, [satData, relativeTime]);
 
   useEffect(() => {
     if (isISSTracked) {
@@ -97,7 +97,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       // @ts-ignore
       globeEl.current.controls().update();
     }
-  }, [time, satPosition, isISSTracked]);
+  }, [relativeTime, satPosition, isISSTracked]);
 
   const satObject = useMemo(() => {
     if (!globeRadius) return undefined;
@@ -125,8 +125,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   const gData = useMemo(() => {
     const data = buildPathsBetweenDates(
       satData!,
-      time,
-      moment(time).add(4, "hours").toDate()
+      relativeTime,
+      moment(relativeTime).add(4, "hours").toDate()
     );
     return data;
     // eslint-disable-next-line react-hooks/exhaustive-deps

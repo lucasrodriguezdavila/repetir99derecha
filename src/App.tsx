@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { SatRec, twoline2satrec } from "satellite.js";
 import { SatelliteTLEResponse } from "./services/types/satelliteTleResponse";
 import { getSatelliteByID } from "./services/SatelliteService";
+import Range from "./components/Range";
 
 function App() {
   const satelliteId = 25544;
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App">
+      <Range />
       <MainNavbar />
       {satRec && <Globo satelliteId={satelliteId} satRec={satRec} />}
     </div>

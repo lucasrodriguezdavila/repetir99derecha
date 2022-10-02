@@ -1,11 +1,23 @@
 .range-container {
   color: white;
+  position: absolute;
+  bottom: 1rem;
+  width: 30%;
+  left: 0;
+  z-index: 100;
 }
 
 .range-input-container {
   display: flex;
-  height: 3rem;
+  height: 1rem;
   width: 100%;
+}
+
+.range-dates-container {
+  padding: 0px 1rem;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .range-input-container input {

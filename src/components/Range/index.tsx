@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import moment from "moment";
-import { DATE_FORMAT } from "../../constants";
 import "./index.css";
+import { useSatellite } from "../../context/SatelliteContext";
 
 interface Props {
   onChange?: (e: Date) => void;
@@ -9,27 +9,30 @@ interface Props {
 
 const Range: React.FC<Props> = ({ onChange }) => {
   const [time, setTime] = useState<Date>(new Date());
-  const [range, setRange] = useState<number>(time.getTime());
+  const { relativeTime, setRelativeTime } = useSatellite();
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
-      setRange((range) => range + 1000);
+      setRelativeTime(
+        (relativeTime) => new Date(relativeTime.getTime() + 1000)
+      );
     }, 1000);
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (onChange) {
-      onChange(new Date(range));
+      onChange(new Date(relativeTime));
     }
-  }, [range, onChange]);
+  }, [relativeTime, onChange]);
 
   const handleOnChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.value) {
-      setRange(Number(e.target.value));
+      setRelativeTime(new Date(Number(e.target.value)));
     }
   };
 
@@ -44,19 +47,18 @@ const Range: React.FC<Props> = ({ onChange }) => {
   return (
     <>
       <div className="range-container">
-        <div>
-          <p>{moment(new Date(range)).format(DATE_FORMAT)}</p>
+        <div className="range-dates-container">
+          <p>{moment(new Date(relativeTime)).format("DD/MM/YYYY")}</p>
+          <p>{moment(new Date(relativeTime)).format("HH:mm:ss")}</p>
         </div>
 
         <div className="range-input-container">
-          <p>{moment(new Date(minDate)).format(DATE_FORMAT)}</p>
           <input
             min={minDate}
             max={maxDate}
             onChange={handleOnChange}
             type="range"
           ></input>
-          <p>{moment(new Date(maxDate)).format(DATE_FORMAT)}</p>
         </div>
       </div>
     </>
