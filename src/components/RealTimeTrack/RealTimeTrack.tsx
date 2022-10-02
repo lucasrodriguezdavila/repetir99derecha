@@ -282,13 +282,14 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         </Panel>
       )}
       <NASASpotStation visible={!isISSTracked} />
+      {!isISSTracked && <>       
       <Location
         location={currentLocation}
         onLocationPrompt={promptLocation}
         onLocationFocus={handleLocationFocus}
       />
       <NasaLogo />
-      <SpaceAppsLogo />
+      <SpaceAppsLogo /></>}
     </>
   );
 };
