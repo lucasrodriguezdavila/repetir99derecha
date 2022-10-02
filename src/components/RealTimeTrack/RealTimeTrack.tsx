@@ -224,6 +224,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         atmosphereAltitude={0.3}
         // @ts-ignore
         pathPointAlt={satPosition.altitude}
+        pathColor={() => "rgba(239, 58, 31, 0.8)"}
         pathDashAnimateTime={100000}
         ringsData={currentLocation ? [currentLocation] : []}
         ringColor={() => colorInterpolator}
