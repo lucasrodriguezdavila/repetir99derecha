@@ -1,8 +1,12 @@
 import axios from "axios";
 import { SatelliteTLEResponse } from "./types/satelliteTleResponse";
 
+//disable cors
 const axiosInstance = axios.create({
   timeout: 5000,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
 export function getCorsFreeUrl(url: string) {
