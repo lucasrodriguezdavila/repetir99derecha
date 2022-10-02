@@ -25,6 +25,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import moment from "moment";
 import { useSatellite } from "../../context/SatelliteContext";
 import * as THREE from "three";
+import Panel from "../Live/Panel/Panel";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
 
@@ -178,32 +179,35 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
   }, [satData]);
 
   return (
-    <Globe
-      ref={globeEl}
-      objectsData={[satPosition]}
-      objectThreeObject={satObject}
-      objectLabel="name"
-      objectLat="latitude"
-      objectLng="longitude"
-      objectAltitude="altitude"
-      globeImageUrl={getCorsFreeUrl(
-        "https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg?raw=true"
-      )}
-      bumpImageUrl={getCorsFreeUrl(
-        "https://github.com/turban/webgl-earth/blob/master/images/elev_bump_4k.jpg?raw=true"
-      )}
-      pathsData={gData}
-      atmosphereAltitude={0.3}
-      // @ts-ignore
-      pathPointAlt={satPosition.altitude}
-      pathDashAnimateTime={100000}
-      ringsData={currentLocation ? [currentLocation] : []}
-      ringColor={() => colorInterpolator}
-      ringAltitude={0.01}
-      ringMaxRadius={2}
-      ringPropagationSpeed={1}
-      ringRepeatPeriod={1000}
-    />
+    <>
+      <Globe
+        ref={globeEl}
+        objectsData={[satPosition]}
+        objectThreeObject={satObject}
+        objectLabel="name"
+        objectLat="latitude"
+        objectLng="longitude"
+        objectAltitude="altitude"
+        globeImageUrl={getCorsFreeUrl(
+          "https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg?raw=true"
+        )}
+        bumpImageUrl={getCorsFreeUrl(
+          "https://github.com/turban/webgl-earth/blob/master/images/elev_bump_4k.jpg?raw=true"
+        )}
+        pathsData={gData}
+        atmosphereAltitude={0.3}
+        // @ts-ignore
+        pathPointAlt={satPosition.altitude}
+        pathDashAnimateTime={100000}
+        ringsData={currentLocation ? [currentLocation] : []}
+        ringColor={() => colorInterpolator}
+        ringAltitude={0.01}
+        ringMaxRadius={2}
+        ringPropagationSpeed={1}
+        ringRepeatPeriod={1000}
+      />
+      {isISSTracked && <Panel></Panel>}
+    </>
   );
 };
 
