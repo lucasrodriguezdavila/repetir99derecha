@@ -104,10 +104,6 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         })();
       }
     );
-    const interval = setInterval(() => {
-      setRelativeTime(new Date());
-    }, TIME_STEP);
-    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
