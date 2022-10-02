@@ -29,6 +29,7 @@ import * as THREE from "three";
 import Panel from "../Live/Panel/Panel";
 import { NASASpotStation } from "../NASASpotStation";
 import YoutubeEmbed from "../YoutubeEmbed/YoutubeEmbed";
+import "./index.css";
 
 const colorInterpolator = (t: number) => `rgba(255,100,50,${Math.sqrt(1 - t)})`;
 
@@ -138,11 +139,13 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         //@ts-ignore
         altitude: (satPosition.altitude as number) + ALTITUDE_OFFSET,
       });
+
       // @ts-ignore
       globeEl.current.controls().enableRotate = false;
       // @ts-ignore
       globeEl.current.controls().update();
     } else {
+      globeEl!.current!.pointOfView({ altitude: 3.5 });
       // @ts-ignore
       globeEl.current.controls().enableRotate = true;
       // @ts-ignore
@@ -213,12 +216,49 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
       />
       {isISSTracked && (
         <Panel position="left">
-          <Logo />
+          <>
+            <Logo />
+            <h3>International Space Station.</h3>
+            <article>
+              {" "}
+              The ISS is a proof of the potential of humanity represented by the
+              union of 16 countries with the sole purpose of maintaining the
+              first and only permanent microgravity research station to date. It
+              takes advantage of these peculiar conditions allowing rigorous
+              studies that allow great advances in science and engineering. It
+              was first built by two small modules, one Russian and one
+              American, and later expanded over time to what we see now, being a
+              ship the size of a soccer stadium with modules mainly from Russia
+              and the United States and others from Japan, Canada, and the
+              European Union. The ISS has two objectives, which are research and
+              development in space exploration and research in microgravity
+              conditions. The first is based on testing and developing
+              technology on life support, propulsion, safety and systems that
+              will promote advances towards out-of-Earth orbit travel. The
+              second deals with studies and research in unique conditions that
+              result from being about 400km from the Earth's surface, both in
+              gravity, pressure, temperature, humidity, and other important
+              factors.
+            </article>
+            <h3>CURIOSITIES</h3>
+            Due to the speed and trajectory of the ISS, the crew members observe
+            sunset and sunrise about 16 times per day. This is a biological test
+            for them to pass as they adapt to life on the station. Crew
+            rotations change after 6 months, and life there means a series of
+            physical and mental care along with rigorous and dedicated research
+            work, requiring a lot of knowledge in fields such as astrophysics,
+            astronomy, physics, engineering, among others, combined with a great
+            deal of preparation and psychological fortitude.
+          </>
         </Panel>
       )}
       {isISSTracked && (
         <Panel position="right">
-          <YoutubeEmbed embedId="21X5lGlDOfg" />
+          <div className="video-container">
+            <h1>ISS Live Stream</h1>
+            <YoutubeEmbed url="https://www.youtube.com/embed/86YLFOog4GM" />
+            <YoutubeEmbed url="https://www.youtube.com/embed/ddZu_1Z3BAc" />
+          </div>
         </Panel>
       )}
       <NASASpotStation visible={!isISSTracked} />
