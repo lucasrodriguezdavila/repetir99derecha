@@ -192,6 +192,18 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [satData]);
 
+  const handleLocationFocus = (location: { lat: number; lng: number }) => {
+    if (!globeEl.current) return;
+    globeEl.current.pointOfView(
+      {
+        lat: location.lat,
+        lng: location.lng,
+        altitude: 0.7,
+      },
+      10
+    );
+  };
+
   return (
     <>
       <Globe
@@ -267,7 +279,11 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         </Panel>
       )}
       <NASASpotStation visible={!isISSTracked} />
-      <Location onClick={promptLocation} />
+      <Location
+        location={currentLocation}
+        onLocationPrompt={promptLocation}
+        onLocationFocus={handleLocationFocus}
+      />
     </>
   );
 };

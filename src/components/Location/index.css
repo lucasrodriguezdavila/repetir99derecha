@@ -1,12 +1,35 @@
 .location-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
+  z-index: 100;
+}
+
+.location-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0.2rem;
   background-color: white;
   border-radius: 100%;
   cursor: pointer;
+  z-index: 101;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.location-description-container {
+  margin-left: -0.5rem;
+  padding: 0.45rem 0.75rem 0.55rem 0.75rem;
+  background-color: white;
+  border-radius: 0px 8px 8px 0px;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.location-text {
+  font-weight: 500;
+  margin: 0px;
 }
