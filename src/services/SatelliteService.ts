@@ -9,8 +9,6 @@ export function getCorsFreeUrl(url: string) {
   return "https://api.allorigins.win/raw?url=" + url;
 }
 
-const BASE_URL = process.env.REACT_APP_TLE_API_URL ?? "";
-
 export const getSatelliteByID = async (id: number) => {
   const url = getCorsFreeUrl(`http://celestrak.org/NORAD/elements/gp.php?CATNR=${id}&FORMAT=tle`);
   const response = await axiosInstance.get(url);

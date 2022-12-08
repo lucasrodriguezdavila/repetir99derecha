@@ -14,10 +14,7 @@ import {
   buildPathsBetweenDates,
   buildSatellitePostion,
 } from "../../helpers/SatellitePositionHelper";
-import {
-  getCorsFreeUrl,
-  getSatelliteByID,
-} from "../../services/SatelliteService";
+import { getSatelliteByID } from "../../services/SatelliteService";
 import { SatelliteTLEResponse } from "../../services/types/satelliteTleResponse";
 
 //stuff about the ISS model
@@ -94,9 +91,7 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
     handleLoadISSModel("/assets/ISS1.gltf");
     promptLocation();
     new THREE.TextureLoader().load(
-      getCorsFreeUrl(
-        "https://github.com/turban/webgl-earth/blob/master/images/fair_clouds_4k.png?raw=true"
-      ),
+      require("../../assets/fair_clouds_4k.png"),
       (cloudsTexture) => {
         const CLOUDS_ALT = 0.004;
         const CLOUDS_ROTATION_SPEED = -0.006; // deg/frame
@@ -216,12 +211,8 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         objectLat="latitude"
         objectLng="longitude"
         objectAltitude="altitude"
-        globeImageUrl={getCorsFreeUrl(
-          "https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg?raw=true"
-        )}
-        bumpImageUrl={getCorsFreeUrl(
-          "https://github.com/turban/webgl-earth/blob/master/images/elev_bump_4k.jpg?raw=true"
-        )}
+        globeImageUrl={require("../../assets/2_no_clouds_4k.jpg")}
+        bumpImageUrl={require("../../assets/elev_bump_4k.jpg")}
         pathsData={gData}
         atmosphereAltitude={0.3}
         // @ts-ignore
@@ -282,14 +273,17 @@ const RealTimeTrack = ({ satelliteId }: GloboProps) => {
         </Panel>
       )}
       <NASASpotStation visible={!isISSTracked} />
-      {!isISSTracked && <>       
-      <Location
-        location={currentLocation}
-        onLocationPrompt={promptLocation}
-        onLocationFocus={handleLocationFocus}
-      />
-      <NasaLogo />
-      <SpaceAppsLogo /></>}
+      {!isISSTracked && (
+        <>
+          <Location
+            location={currentLocation}
+            onLocationPrompt={promptLocation}
+            onLocationFocus={handleLocationFocus}
+          />
+          <NasaLogo />
+          <SpaceAppsLogo />
+        </>
+      )}
     </>
   );
 };
