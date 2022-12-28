@@ -1,6 +1,6 @@
 # [Space Apps 2022 Challenge](https://2022.spaceappschallenge.org/challenges/2022-challenges/track-the-iss/details) - Where ISS
 
-> [See it live!](whereiss.earth)
+> [See it live!](https://whereiss.earth/)
 
 Where ISS is a web application that allows to observe the globe and the route of the ISS live. In addition to interesting data and images from the satellite cameras.
 
